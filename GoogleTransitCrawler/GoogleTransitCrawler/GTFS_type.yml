@@ -1,0 +1,88 @@
+agency: 
+ agency_id: string
+ agency_id: string
+ agency_name: string
+ agency_url: string
+ agency_timezone: string
+ agency_lang: string
+ agency_phone: string
+ agency_fare_url: string
+
+calendar:
+ agency_id: string
+ service_id: string
+ monday: int
+ tuesday: int
+ wednesday: int
+ thursday: int
+ friday: int
+ saturday: int
+ sunday: int
+ start_date: date
+ end_date: date
+
+routes:
+ agency_id: string
+ route_id: string
+ route_short_name: string
+ route_long_name: string
+ route_desc: string
+ route_type: int
+ route_url: string
+ route_color: string
+ route_text_color: string
+
+shapes:
+ agency_id: string
+ shape_id: string
+ shape_pt_lat: double
+ shape_pt_lon: double
+ shape_pt_sequence: int
+ shape_dist_traveled: double
+
+stop_times:
+ agency_id: string
+ trip_id: string
+ arrival_time: string
+ departure_time: string
+ stop_id: string
+ stop_sequence: int
+ stop_headsign: string
+ pickup_type: int
+ drop_off_type: int
+ shape_dist_traveled: double
+
+stops:
+ agency_id: string
+ stop_id: string
+ stop_code: string
+ stop_name: string
+ stop_desc: string
+ stop_lat: double
+ stop_lon: double
+ zone_id: string
+ stop_url: string
+ location_type: int
+ parent_station: string
+ stop_timezone: string
+ wheelchair_boarding: int
+
+transfers:
+ agency_id: string
+ from_stop_id: string
+ to_stop_id: string
+ transfer_type: int
+ min_transfer_time: int
+
+trips:
+ agency_id: string
+ route_id: string
+ service_id: string
+ trip_id: string
+ trip_headsign: string
+ trip_short_name: string
+ direction_id: int
+ block_id: string
+ shape_id: string
+ wheelchair_accessible: int
+

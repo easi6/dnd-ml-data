@@ -1,0 +1,5 @@
+*test*
+data/*
+data_bk/*
+.tmp
+feeds.log
