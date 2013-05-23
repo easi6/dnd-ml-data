@@ -69,6 +69,19 @@ for sbj_idx = 1:length(sbj_list) % For every subject
         % Read File
         try
             data_val = dlmread(path);
+            % Preprocess (trim) on gps(0, 0)
+            if all(data_val(1,2:3) == [0 0])
+                trim_idx = 1;
+                while(all(data_val(trim_idx,2:3) == [0 0]))
+                    trim_idx = trim_idx+1;
+                end
+                data_val = data_val( trim_idx:end, :);
+            end
+            if size(data_val, 1) == 0 || size(unique(data_val(:,2:3), 'rows'), 1) <= 3
+                fprintf('GPS Error skipping\n');
+                continue;
+            end            
+            
         catch err
             fprintf('WARNING: badly formatte5d file\n');
             continue;
@@ -81,13 +94,22 @@ for sbj_idx = 1:length(sbj_list) % For every subject
         res = result{1};
         if strcmp(res, 'No Data') % No stored data
             clear('Dat');
-            try
-                Dat = Data(sbj_name, dat_name, data_val, true);
-            catch err
-                fprintf('GPS Error skipping\n');
-                continue;
-            end
+            Dat = Data(sbj_name, dat_name, data_val, true);
             save(['data/' sbj_name '/' dat_name '.mat'], 'Dat');
+            % trimming begins
+            source = fopen(path, 'r');
+            dest = fopen([path, '.trim'], 'w');
+            for i=1:(trim_idx-1) % trimming (0, 0)
+                fgets(source);
+            end
+            line = fgets(source);
+            while ischar(line)
+                fprintf(dest,'%s',line);
+                line = fgets(source);
+            end
+            fclose(source);
+            fclose(dest);
+            
             fprintf('Complete\n');
             new_cnt = new_cnt + 1;
         else

@@ -13,7 +13,7 @@ db = DBHelper;
 % sql = ['SELECT * from data WHERE bat_mean_bat>0 AND ', ...
 %     'len>1000 AND gps_mean_lng<0 AND trs_maj_trs=4;'];
 sql = ['SELECT * from data WHERE bat_mean_bat>0 AND ', ...
-    'len>3000 AND gps_mean_lng<0;'];
+    'len>3000 AND gps_mean_lng<0 AND dat_name=''logdata_1349485796'';'];
 
 filtered = db.query(sql);
 disp(filtered(:,1:2));

@@ -27,20 +27,7 @@ classdef Data < handle
         function obj = Data(sbj_name, dat_name, data, tf)
             obj.meta.sbj_name = sbj_name;
             obj.meta.dat_name = dat_name;
-            
-            % Preprocess (trim) on gps(0, 0)
-            if all(data(1,2:3) == [0 0])
-                trim_idx = 1;
-                while(all(data(trim_idx,2:3) == [0 0]))
-                    trim_idx = trim_idx+1;
-                end
-                data = data( trim_idx:end, :);
-                
-                if size(data, 1) == 0 || size(unique(data(:,2:3), 'rows'), 1) <= 3
-                    throw(MExcption('Data:GPSerror', 'No effective GPS data'));
-                end
-            end
-               
+                         
             % transit labels start from 1 
             data(:,13) = data(:,13) + 1;
             

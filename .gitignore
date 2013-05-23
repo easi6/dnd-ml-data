@@ -1,1 +1,6 @@
 data
+*.swp
+*.m~
+*.asv
+train_data
+*.pyc
